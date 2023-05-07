@@ -20,7 +20,6 @@ import java.util.List;
 @RestController()
 @RequestMapping("/role")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "jwt")
 public class RoleRestController {
     private final IRoleHandler roleHandler;
 

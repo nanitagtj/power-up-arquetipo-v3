@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.Optional;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findByDniNumber(String dniNumber);
+    Optional<UserEntity> findByMail(String mail);
 
     Boolean existsByDniNumber(String dniNumber);
 
     boolean existsByMail(String mail);
+
+    Optional<Object> findByDniNumber(String dniNumber);
 }

@@ -4,6 +4,7 @@ import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositorie
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.PrincipalUser;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.RoleEntity;
+import com.pragma.powerup.usermicroservice.configuration.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,13 +19,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    JwtProvider jwtProvider;
 
     @Override
-    public UserDetails loadUserByUsername(String documentID) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByDniNumber(documentID).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByMail(mail).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         if (user.getRole() == null) {
-            throw new UsernameNotFoundException("User not found with documentID: " + documentID);
+            throw new UsernameNotFoundException("User not found with email: " + mail);
         }
 
         List<RoleEntity> roles = new ArrayList<>();
@@ -32,4 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return PrincipalUser.build(user, roles);
     }
+
+
 }

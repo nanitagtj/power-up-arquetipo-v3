@@ -1,26 +1,24 @@
 INSERT INTO `user` (
-    `id`,
     `dni_number`,
     `mail`,
     `name`,
     `password`,
     `phone`,
     `surname`,
-    `token_password`
+    `id_role`,
+
   )
 VALUES
   (
-    '1',
-    '123',
+    '1234567890','Name',
+    'Name'
     'email@some.com',
-    'Name',
-    '$2a$10$GlsGSNhkbVon6ZOSNMptOu5RikedRzlCAhMa7YpwvUSS0c88WT99S',
-    '1234567890',
-    'Surname',
-    NULL
+    '+3223226835'
+
+    '1',
+    '1234'
   );
 
 
-INSERT INTO `role` (`id`, `description`, `name`) VALUES ('1', 'ROLE_ADMIN', 'ROLE_ADMIN');
-INSERT INTO `role` (`id`, `description`, `name`) VALUES ('2', 'ROLE_USER', 'ROLE_USER');
+INSERT INTO `role` (`id`, `description`, `name`) VALUES ('1', 'ADMIN', 'ROLE_ADMIN');
 

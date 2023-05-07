@@ -43,6 +43,4 @@ public class BeanConfiguration {
         return new UserUseCase(userPersistencePort());
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 }

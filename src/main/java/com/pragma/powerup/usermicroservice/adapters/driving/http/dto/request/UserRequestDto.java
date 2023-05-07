@@ -11,18 +11,19 @@ import lombok.Getter;
 @Getter
 public class UserRequestDto {
     @NotNull
+    private String dniNumber;
+    @Email
+    @NotNull
+    private String mail;
+    @NotNull
     private String name;
     @NotNull
-    private String surname;
-    @NotNull
-    @Email
-    private String email;
+    private String password;
     @NotNull
     private String phone;
     @NotNull
-    private String dniNumber;
+    private String surname;
     @NotNull
     private Role role;
-    @NotNull
-    private String password;
+
 }

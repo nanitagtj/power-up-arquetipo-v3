@@ -20,10 +20,10 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user/")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserRestController {
-    private final IUserHandler personHandler;
+    private final IUserHandler userHandler;
 
     @Operation(summary = "Add a new user",
             responses = {
@@ -33,7 +33,7 @@ public class UserRestController {
                         content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @PostMapping("/user")
     public ResponseEntity<Map<String, String>> saveUser(@RequestBody UserRequestDto userRequestDto) {
-        personHandler.saveUser(userRequestDto);
+        userHandler.saveUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
@@ -46,7 +46,7 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @PostMapping("/owner")
     public ResponseEntity<Map<String, String>> saveOwner(@RequestBody UserRequestDto userRequestDto, @RequestParam String role) {
-        personHandler.saveOwner(userRequestDto);
+        userHandler.saveOwner(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
