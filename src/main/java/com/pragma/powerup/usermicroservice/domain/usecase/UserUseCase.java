@@ -8,8 +8,8 @@ import com.pragma.powerup.usermicroservice.domain.validations.validations;
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
 
-    public UserUseCase(IUserPersistencePort personPersistencePort) {
-        this.userPersistencePort = personPersistencePort;
+    public UserUseCase(IUserPersistencePort userPersistencePort) {
+        this.userPersistencePort = userPersistencePort;
     }
 
     @Override

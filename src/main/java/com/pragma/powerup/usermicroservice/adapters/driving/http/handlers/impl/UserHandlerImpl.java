@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserHandlerImpl implements IUserHandler {
-    private final IUserServicePort personServicePort;
-    private final IUserRequestMapper personRequestMapper;
+    private final IUserServicePort userServicePort;
+    private final IUserRequestMapper userRequestMapper;
 
     @Override
     public void saveUser(UserRequestDto userRequestDto) {
-        personServicePort.saveUser(personRequestMapper.toUser(userRequestDto));
+        userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
     }
 
     @Override
     public void saveOwner(UserRequestDto userRequestDto) {
-        personServicePort.saveUser(personRequestMapper.toUser(userRequestDto));
+        userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
     }
 }

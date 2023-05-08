@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,8 @@ public class UserRestController {
                         content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                 @ApiResponse(responseCode = "409", description = "User already exists",
                         content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PostMapping("/user")
-    public ResponseEntity<Map<String, String>> saveUser(@RequestBody UserRequestDto userRequestDto) {
+    @PostMapping("/admin")
+    public ResponseEntity<Map<String, String>> saveUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         userHandler.saveUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
