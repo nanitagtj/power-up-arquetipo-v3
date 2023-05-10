@@ -20,7 +20,7 @@ public class UserMysqlAdapter implements IUserPersistencePort {
             throw new UserAlreadyExistsException();
         }
 
-        if (userRepository.existsByMail(user.getEmail())){
+        if (userRepository.existsByMail(user.getMail())){
             throw new MailAlreadyExistsException();
         }
 
@@ -36,7 +36,7 @@ public class UserMysqlAdapter implements IUserPersistencePort {
             throw new UserAlreadyExistsException();
         }
 
-        if (userRepository.existsByMail(user.getEmail())){
+        if (userRepository.existsByMail(user.getMail())){
             throw new MailAlreadyExistsException();
         }
 

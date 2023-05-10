@@ -55,11 +55,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setEmail(String mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 

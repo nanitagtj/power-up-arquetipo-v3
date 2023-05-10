@@ -37,22 +37,24 @@ public class JwtProvider {
         PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
         List<String> roles = principalUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         String token = Jwts.builder()
-                .setSubject(principalUser.getUsername())
+                .setSubject(principalUser.getMail())
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 180))
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
+        System.out.println("Secret: " + secret);
+        System.out.println("Token generado: " + token);
         return token;
     }
 
-    public String getUserNameFromToken(String token) {
+    public String getEmailFromToken(String token) {
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(secret.getBytes()).build().parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("token mal formado");

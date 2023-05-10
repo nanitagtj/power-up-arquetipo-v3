@@ -28,25 +28,12 @@ public class UserRestController {
 
     @Operation(summary = "Add a new user",
             responses = {
-                @ApiResponse(responseCode = "201", description = "User created",
-                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                @ApiResponse(responseCode = "409", description = "User already exists",
-                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PostMapping("/admin")
-    public ResponseEntity<Map<String, String>> saveUser(@Valid @RequestBody UserRequestDto userRequestDto) {
-        userHandler.saveUser(userRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
-    }
-
-    @Operation(summary = "Add a new owner",
-            responses = {
                     @ApiResponse(responseCode = "201", description = "owner created",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "409", description = "Owner already exists",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @PostMapping("/owner")
-    public ResponseEntity<Map<String, String>> saveOwner(@RequestBody UserRequestDto userRequestDto, @RequestParam String role) {
+    public ResponseEntity<Map<String, String>> saveOwner(@RequestBody UserRequestDto userRequestDto) {
         userHandler.saveOwner(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));

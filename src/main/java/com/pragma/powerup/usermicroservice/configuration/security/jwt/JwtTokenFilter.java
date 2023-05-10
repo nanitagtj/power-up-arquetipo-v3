@@ -34,10 +34,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = getToken(req);
         if (token != null && jwtProvider.validateToken(token)) {
-            String mail = jwtProvider.getUserNameFromToken(token);
+            String mail = jwtProvider.getEmailFromToken(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(mail);
             List<String> userRoles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-            if (userRoles.contains("ADMIN") || userRoles.contains("OWNER")) {
+            if (userRoles.contains("ROLE_ADMIN") || userRoles.contains("ROLE_OWNER")) {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
                         null,
                         userDetails.getAuthorities());
